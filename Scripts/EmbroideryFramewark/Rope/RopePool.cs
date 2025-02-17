@@ -70,7 +70,7 @@ namespace EmbroideryFramewark
 
         public SingleRopeHelper PreRopeHelper {  get => _ropeHelpers[pre]; }
 
-        private SingleRopeHelper _afterRopeHelper { get =>_ropeHelpers[after]; }
+        public SingleRopeHelper AfterRopeHelper { get =>_ropeHelpers[after]; }
 
         /// <summary>
         /// 绳子的半径，用于处理吸附
@@ -108,17 +108,11 @@ namespace EmbroideryFramewark
 
             RenewOrder();
 
-            /////显示
-            //this.CurrentRopeHelper.SetRopeActive();
-
             this.CurrentRopeHelper.SetBeginPosition(begin);
             this.CurrentRopeHelper.SetEndPosition(end);
             this.CurrentRopeHelper.SetRopeLengthTo(length);
 
-
-
             return true;
-
         }
 
 
@@ -146,30 +140,6 @@ namespace EmbroideryFramewark
             //PreRopeHelper.SetRopeDisActive();
 
             IsBorrowing = false;
-        }
-
-        /// <summary>
-        /// 不需要
-        /// </summary>
-        private void ReSetRope()
-        {
-            this.PreRopeHelper.gameObject.SetActive(false);
-            this.PreRopeHelper.gameObject.SetActive(true);
-
-
-            ObiRope rope = PreRopeHelper.GetComponentInChildren<ObiRope>();
-            int totalCount = rope.particleCount;
-
-            Vector3 endPosition = rope.GetParticlePosition(totalCount);
-            Vector3 beginPosition = rope.GetParticlePosition(1);
-
-            //PreRopeHelper._beginTransform.position = beginPosition;
-            //PreRopeHelper._endTransform.position = endPosition;
-
-            Debug.Log("AllCount:"+totalCount+ "  endPosition:"+ endPosition+ "   beginPosition:"+ beginPosition);
-
-            this.PreRopeHelper.gameObject.SetActive(false);
-
         }
 
         private void RenewOrder()

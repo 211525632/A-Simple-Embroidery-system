@@ -124,7 +124,7 @@ namespace EmbroideryFramewark
             EventCenter<Action>.Instance.AddEvent(EventConst.OnRopeShrink, OnRopeShrink);
 
             //OnShrinkComplete
-            EventCenter<Action>.Instance.AddEvent(EventConst.OnRopeShrinkComplete, ChangeToModel);
+            EventCenter<Action>.Instance.AddEvent(EventConst.OnRopeShrinkComplete, ChangeToModelAndSaveOperation);
 
         }
 
@@ -165,9 +165,10 @@ namespace EmbroideryFramewark
         /// <summary>
         /// TODO:还可以添加”刺绣操作的撤销操作“所需要的对象池与快照相关函数
         /// </summary>
-        private void ChangeToModel()
+        private void ChangeToModelAndSaveOperation()
         {
-            RopeManager.Instance.RopeChangeToModel();
+            GameObject PreRopeModel = RopeManager.Instance.RopeChangeToModel();
+            EmbroideryOpSaverCtl.Instance.SaveNewOp(RopeManager.Instance.PreferRopeHelper, PreRopeModel);
         }
 
         /// <summary>

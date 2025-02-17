@@ -194,7 +194,6 @@ MonoBehaviour:
   _obiSolverModel: {fileID: 5549466074252486355, guid: a241514612411f1479ae32a2a2a976db,
     type: 3}
   _empty: {fileID: 3990078503246664737, guid: 73d6095cd79760b478b52f293ea56869, type: 3}
-  _ropeModelList: []
 --- !u!4 &106510023
 Transform:
   m_ObjectHideFlags: 0
@@ -930,7 +929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791717206}
-  - component: {fileID: 791717205}
+  - component: {fileID: 791717207}
   m_Layer: 0
   m_Name: SaveOpManager
   m_TagString: Untagged
@@ -938,20 +937,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &791717205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791717204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705ff40b03ea0e34b805b404568a72ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnableSaveTest: 0
-  isEnableReSetTest: 0
 --- !u!4 &791717206
 Transform:
   m_ObjectHideFlags: 0
@@ -967,6 +952,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791717207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791717204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b754a9f34761a418350c8a2a42d5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

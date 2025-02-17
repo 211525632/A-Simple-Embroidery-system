@@ -82,6 +82,24 @@ namespace EmbroideryFramewark
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IsSaveOp"",
+                    ""type"": ""Button"",
+                    ""id"": ""75397393-3dd0-447a-b19c-2894e4798a51"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IsRevokeOp"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee74621b-38d1-4dbe-96b1-9a3344474fd5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,6 +234,72 @@ namespace EmbroideryFramewark
                     ""action"": ""ConfirmPinPoint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""ctrl + arrUp"",
+                    ""id"": ""2b2eaf9c-0adf-47b3-a6c2-19b4ee7614d0"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": ""SlowTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsSaveOp"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""7f55991c-a012-40b5-8a74-1ddcb143c612"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsSaveOp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""221e5d22-1105-4efc-9f75-a66f9d6cec39"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsSaveOp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""ctrl + arrDown"",
+                    ""id"": ""b496de67-ac66-464d-8631-a8baa90ef87c"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": ""SlowTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsRevokeOp"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""eb83a6b1-ef2b-4256-ab7d-f3642873faf0"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsRevokeOp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""0f99cefb-e9cb-4d6c-8e69-8a996986a135"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsRevokeOp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -230,6 +314,8 @@ namespace EmbroideryFramewark
             m_EmbroideryCamerCtl_CameraScale = m_EmbroideryCamerCtl.FindAction("CameraScale", throwIfNotFound: true);
             m_EmbroideryCamerCtl_MovePin = m_EmbroideryCamerCtl.FindAction("MovePin", throwIfNotFound: true);
             m_EmbroideryCamerCtl_ConfirmPinPoint = m_EmbroideryCamerCtl.FindAction("ConfirmPinPoint", throwIfNotFound: true);
+            m_EmbroideryCamerCtl_IsSaveOp = m_EmbroideryCamerCtl.FindAction("IsSaveOp", throwIfNotFound: true);
+            m_EmbroideryCamerCtl_IsRevokeOp = m_EmbroideryCamerCtl.FindAction("IsRevokeOp", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -297,6 +383,8 @@ namespace EmbroideryFramewark
         private readonly InputAction m_EmbroideryCamerCtl_CameraScale;
         private readonly InputAction m_EmbroideryCamerCtl_MovePin;
         private readonly InputAction m_EmbroideryCamerCtl_ConfirmPinPoint;
+        private readonly InputAction m_EmbroideryCamerCtl_IsSaveOp;
+        private readonly InputAction m_EmbroideryCamerCtl_IsRevokeOp;
         public struct EmbroideryCamerCtlActions
         {
             private @EmbroideryAction m_Wrapper;
@@ -307,6 +395,8 @@ namespace EmbroideryFramewark
             public InputAction @CameraScale => m_Wrapper.m_EmbroideryCamerCtl_CameraScale;
             public InputAction @MovePin => m_Wrapper.m_EmbroideryCamerCtl_MovePin;
             public InputAction @ConfirmPinPoint => m_Wrapper.m_EmbroideryCamerCtl_ConfirmPinPoint;
+            public InputAction @IsSaveOp => m_Wrapper.m_EmbroideryCamerCtl_IsSaveOp;
+            public InputAction @IsRevokeOp => m_Wrapper.m_EmbroideryCamerCtl_IsRevokeOp;
             public InputActionMap Get() { return m_Wrapper.m_EmbroideryCamerCtl; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -334,6 +424,12 @@ namespace EmbroideryFramewark
                 @ConfirmPinPoint.started += instance.OnConfirmPinPoint;
                 @ConfirmPinPoint.performed += instance.OnConfirmPinPoint;
                 @ConfirmPinPoint.canceled += instance.OnConfirmPinPoint;
+                @IsSaveOp.started += instance.OnIsSaveOp;
+                @IsSaveOp.performed += instance.OnIsSaveOp;
+                @IsSaveOp.canceled += instance.OnIsSaveOp;
+                @IsRevokeOp.started += instance.OnIsRevokeOp;
+                @IsRevokeOp.performed += instance.OnIsRevokeOp;
+                @IsRevokeOp.canceled += instance.OnIsRevokeOp;
             }
 
             private void UnregisterCallbacks(IEmbroideryCamerCtlActions instance)
@@ -356,6 +452,12 @@ namespace EmbroideryFramewark
                 @ConfirmPinPoint.started -= instance.OnConfirmPinPoint;
                 @ConfirmPinPoint.performed -= instance.OnConfirmPinPoint;
                 @ConfirmPinPoint.canceled -= instance.OnConfirmPinPoint;
+                @IsSaveOp.started -= instance.OnIsSaveOp;
+                @IsSaveOp.performed -= instance.OnIsSaveOp;
+                @IsSaveOp.canceled -= instance.OnIsSaveOp;
+                @IsRevokeOp.started -= instance.OnIsRevokeOp;
+                @IsRevokeOp.performed -= instance.OnIsRevokeOp;
+                @IsRevokeOp.canceled -= instance.OnIsRevokeOp;
             }
 
             public void RemoveCallbacks(IEmbroideryCamerCtlActions instance)
@@ -381,6 +483,8 @@ namespace EmbroideryFramewark
             void OnCameraScale(InputAction.CallbackContext context);
             void OnMovePin(InputAction.CallbackContext context);
             void OnConfirmPinPoint(InputAction.CallbackContext context);
+            void OnIsSaveOp(InputAction.CallbackContext context);
+            void OnIsRevokeOp(InputAction.CallbackContext context);
         }
     }
 }

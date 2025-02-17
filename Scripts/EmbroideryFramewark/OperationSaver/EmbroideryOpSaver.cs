@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pinwheel.MeshToFile;
+using System;
 
 namespace EmbroideryFramewark
 {
@@ -45,58 +46,106 @@ namespace EmbroideryFramewark
     }
 
 
-
-    [RequireComponent(typeof(RopeManager))]
-    public class EmbroideryOpSaver : MonoSingleton<EmbroideryOpSaver>
+    public class EmbroideryOpSaver
     {
-        protected override void Awake()
+
+        public EmbroideryOpSaver()
         {
-            base.Awake();
+            RopeDatas = new();
+            RopeModels = new();
+
+            _opDateCachine = new();
+            _opModelCachine = new();
         }
-
-        [Header("测试相关：")]
-        public bool isEnableSaveTest = false;
-
-        public bool isEnableReSetTest = false;
-
-        private void Update()
-        {
-            if (isEnableSaveTest)
-            {
-                isEnableSaveTest = false;
-                this.SaveOp(RopeManager.Instance.PreferRopeHelper);
-            }
-
-            if (isEnableReSetTest)
-            {
-                isEnableReSetTest = false;
-                this.ReCreateRope();
-            }
-        }
-
 
         /// <summary>
         /// 存放每一次操作的绳子信息
         /// </summary>
-        public readonly Stack<SingleRopeData> RopeDatas = new();
+        public readonly Stack<SingleRopeData> RopeDatas;
 
 
         /// <summary>
         /// 存放所有被实例化的模型实例
         /// 通过销毁或者隐藏这个里面的元素来实现撤销操作
         /// </summary>
-        public readonly Stack<GameObject> RopeModels = new();
+        public readonly Stack<GameObject> RopeModels;
 
         /// <summary>
         /// 保存一次刺绣操作
         /// </summary>
-        /// <param name="currentRopeHelper"></param>
-        public void SaveOp(SingleRopeHelper currentRopeHelper)
+        /// <param name="currentRopeHelper">    要保存的Rope的RopeHelper</param>
+        public void SaveOp(SingleRopeHelper currentRopeHelper,GameObject ropeModel)
         {
+            this.ClearCachine();
+
             RopeDatas.Push(new SingleRopeData(currentRopeHelper));
+            RopeModels.Push(ropeModel);
         }
 
 
+        /// <summary>
+        /// 回忆上次操作
+        /// </summary>
+        public void RecollectOp()
+        {
+            //检查是否存在可以回忆的操作
+            if (_opDateCachine.Count <= 0f)
+                return;
+
+            ///释放缓存，放回之前的区域
+            RopeDatas.Push(_opDateCachine.Pop());
+            RopeModels.Push(_opModelCachine.Pop());
+
+            ///显示
+            RopeModels.Peek().SetActive(true);
+
+            ///将剩下的绳子的首部 与 现在的尾部相连接
+            RopeManager.Instance.CurrentRopeHelper.SetEndPosition(RopeDatas.Peek().begin);
+        }
+
+
+        /// <summary>
+        /// --------------------------撤销操作时的缓存-----------------------------------
+        /// </summary>
+        private Stack<SingleRopeData> _opDateCachine;
+
+        private Stack<GameObject> _opModelCachine;
+
+        /// <summary>
+        /// 撤销上一次的操作
+        /// </summary>
+        public void RevokeOp()
+        {
+            //检测是否存在可以撤销的操作
+            if (RopeModels.Count <= 0f)
+                return;
+
+            ///缓存，直到下一次新操作
+            _opDateCachine.Push(RopeDatas.Pop());
+            _opModelCachine.Push(RopeModels.Pop());
+
+            ///隐藏，可以使用池来缓冲
+            _opModelCachine.Peek().SetActive(false);
+
+            RopeManager.Instance.HidePreRope();
+            RopeManager.Instance.HideAfterRope();
+
+            ///将剩下的绳子的首部 与 现在的尾部相连接
+            RopeManager.Instance.CurrentRopeHelper.SetEndPosition(RopeDatas.Peek().begin);
+        }
+
+
+        private void ClearCachine()
+        {
+            _opDateCachine.Clear();
+            
+            int cachineLength = _opModelCachine.Count;
+
+            for(int i=0;i< cachineLength; ++i)
+            {
+                MonoHelper.Destroy(_opModelCachine.Pop());
+            }
+        }
 
 
 
@@ -105,6 +154,10 @@ namespace EmbroideryFramewark
         private SingleRopeData _singleRopeData;
 
         /// <summary>
+        /// TODO:与持久化 + 恢复Stack的数据
+        /// 
+        /// 来实现存档的功能？
+        /// 
         /// 根据当前栈顶元素来初始化新的Rope
         /// 用于恢复之前还没有秀完的刺绣
         /// </summary>

@@ -45,9 +45,9 @@ namespace EmbroideryFramewark
         public static bool IsDragCamera { get => _cameraAction.DragCamera.ReadValue<float>() > 0f; }
 
 
-        //public static bool IsNotCtrl { get {
-        //        Debug.Log("NoCtrlNum:"+_cameraAction.NoCtrl.ReadValue<bool>());
-        //        return _cameraAction.NoCtrl.ReadValue<bool>(); 
-        //     } }
+        public static bool IsSaveOp { get => _cameraAction.IsSaveOp.ReadValue<float>() > 0f; }
+
+        public static bool IsRevokeOp{ get => _cameraAction.IsRevokeOp.ReadValue<float>() > 0f; }
+
     }
 }

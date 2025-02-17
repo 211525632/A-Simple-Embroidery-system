@@ -53,6 +53,13 @@ namespace EmbroideryFramewark
             get => this._ropePool.PreRopeHelper;
         }
 
+
+        public void ResetRope()
+        {
+
+        }
+
+
         #endregion
 
 
@@ -83,14 +90,6 @@ namespace EmbroideryFramewark
             
         }
 
-        /// <summary>
-        /// 对每一个绳子的存储
-        /// TODO：需要维护
-        /// </summary>
-        private List<SingleRopeHelper> _ropeList = new();
-
-        [SerializeField] private List<GameObject> _ropeModelList = new();
-
 
         /// <summary>
         /// 创建新的绳子
@@ -108,6 +107,7 @@ namespace EmbroideryFramewark
         {
 
             _ropePool.ReturnPreRope();
+
             _ropePool.BorrowRopeAndInit(ropeBeginPosition, ropeEnd, ropeLength);
 
             CurrentRopeHelper.SetEndLoackState(true);
@@ -126,20 +126,42 @@ namespace EmbroideryFramewark
         /// 
         /// 就是需要RopeHelper
         /// </summary>
-        public void RopeChangeToModel()
+        public GameObject RopeChangeToModel()
         {
             GameObject model = this.PreferRopeHelper.
                 GetRopeModelObj();
             //静态批处理
             model.isStatic = true;
 
-
-            _ropeModelList.Add(model);
-
+            return model;
         }
 
         #endregion
 
+        #region 绳子的隐藏
+
+        private Vector3 _hidePosition = Vector3.down * 1000f;
+        public void HideCurrentRope()
+        {
+            HideRope(CurrentRopeHelper.transform);
+        }
+
+        public void HidePreRope()
+        {
+            HideRope(PreferRopeHelper.transform);
+        }
+
+        public void HideAfterRope()
+        {
+            HideRope(_ropePool.AfterRopeHelper.transform);
+        }
+
+        private void HideRope(Transform rope)
+        {
+            rope.transform.position = _hidePosition;
+        }
+
+        #endregion
 
         #region 事件设置
 
