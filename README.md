@@ -27,6 +27,14 @@
 
 真正核心为***EmbroideryFramework***目录下的代码。
 
+## 下载须知：
+1. 由于本仓库中只有Asset的内容。由此你需要先创建一个Unity URP项目。
+2. 插件需求：
+   1. new Input system
+3. layer设置
+   1. 由于本项目使用了物理检测，并设置了layer
+   2. 如果出现不能正常使用的情况。请添加以下layer(后续如果有其他layer的设置我会实时更新)![alt text](image.png)
+
 ## 功能简介：
 一.**撤销与回忆**功能:
 

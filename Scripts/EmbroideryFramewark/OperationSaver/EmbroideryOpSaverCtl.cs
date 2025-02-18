@@ -30,7 +30,6 @@ namespace EmbroideryFramewark
 
 
         /// <summary>
-        /// 触发必然是从\
         ///  
         /// (false,false) -> (false | true) -> (false,false)
         /// </summary>
@@ -87,12 +86,6 @@ namespace EmbroideryFramewark
         {
             this.gameObject.SetActive(false);
         }
-
-        #region 事件设置
-
-
-
-        #endregion
 
     }
 }
