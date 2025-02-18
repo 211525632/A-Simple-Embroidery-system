@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace EmbroideryFramewark
@@ -47,24 +48,28 @@ namespace EmbroideryFramewark
             if (m_MouseInput.IsSaveOp)
             {
                 Debug.Log("向前回忆");
-                _saver.RecollectOp();
+                RecollectOp();
                 _active = false;
             }
             else if(m_MouseInput.IsRevokeOp)
             {
                 Debug.Log("向后撤销");
-                _saver.RevokeOp();
+                RevokeOp();
                 _active = false;
             }
         }
-
+        /// <summary>
+        /// 为了保证针的位置始终正确，我决定一次撤销操作将会连续撤销两次
+        /// </summary>
 
         public void RecollectOp() { 
-            _saver.RecollectOp(); 
+            _saver.RecollectOp();
+            _saver.RecollectOp();
         }
 
         public void RevokeOp()
         {
+            _saver.RevokeOp();
             _saver.RevokeOp();
         }
 
@@ -72,8 +77,6 @@ namespace EmbroideryFramewark
         { 
             _saver.SaveOp(currentRopeHelper,ropeModel); 
         }
-
-        
 
         private void Enable()
         {
@@ -84,5 +87,12 @@ namespace EmbroideryFramewark
         {
             this.gameObject.SetActive(false);
         }
+
+        #region 事件设置
+
+
+
+        #endregion
+
     }
 }

@@ -2,6 +2,8 @@ using Obi;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using static UnityEngine.UI.Image;
 
 namespace EmbroideryFramewark
 {
@@ -141,25 +143,41 @@ namespace EmbroideryFramewark
         #region 绳子的隐藏
 
         private Vector3 _hidePosition = Vector3.down * 1000f;
-        public void HideCurrentRope()
+        public void HideOrActiveCurrentRope(bool isActive)
         {
-            HideRope(CurrentRopeHelper.transform);
+            _ropePool.HideOrActiveCurrentRope(isActive);
         }
 
-        public void HidePreRope()
+        public void HideOrActivePreRope(bool isActive)
         {
-            HideRope(PreferRopeHelper.transform);
+            _ropePool.HideOrActivePreRope(isActive);
         }
 
-        public void HideAfterRope()
+        public void HideOrActiveAfterRope(bool isActive)
         {
-            HideRope(_ropePool.AfterRopeHelper.transform);
+            _ropePool.HideOrActiveAfterRope(isActive);
         }
 
-        private void HideRope(Transform rope)
+        #endregion
+
+
+        #region 根据要生成Rope处于布料的位置生成绳子的Begin与End
+
+        /// <summary>
+        /// TODO：将0.01f与布料控制器关联起来
+        /// 根据要生成Rope处于布料的位置生成绳子的Begin与End
+        /// </summary>
+        /// <param name="origin">   初定的刺绣点</param>
+        /// <param name="side">     这个绳子的方位</param>
+        /// <param name="begin">    生成绳子的beign</param>
+        /// <param name="end">      生成绳子的End</param>
+        public void CreateRopePointPositionWithSide(Vector3 origin,float side,out Vector3 begin,out Vector3 end)
         {
-            rope.transform.position = _hidePosition;
+            ///设置新生成的绳子的初始位置
+             begin = new Vector3(origin.x, 0.01f * -side, origin.z);
+             end = new Vector3(origin.x, 0.01f * -side, origin.z);
         }
+
 
         #endregion
 

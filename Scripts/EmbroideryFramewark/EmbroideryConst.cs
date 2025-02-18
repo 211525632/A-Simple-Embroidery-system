@@ -10,7 +10,10 @@ namespace EmbroideryFramewark
 {
     public class EmbroideryConst
     {
-        
+        /// <summary>
+        /// 当撤销操作的时候
+        /// </summary>
+        public static string OnEmbroideryOpRevoke = "OnEmbroideryOpRevoke";
     }
 
 

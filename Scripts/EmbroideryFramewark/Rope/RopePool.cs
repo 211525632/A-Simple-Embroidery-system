@@ -108,6 +108,9 @@ namespace EmbroideryFramewark
 
             RenewOrder();
 
+            ///显示当前的Rope
+            this.HideOrActiveCurrentRope(true);
+
             this.CurrentRopeHelper.SetBeginPosition(begin);
             this.CurrentRopeHelper.SetEndPosition(end);
             this.CurrentRopeHelper.SetRopeLengthTo(length);
@@ -155,6 +158,43 @@ namespace EmbroideryFramewark
         }
 
 
+        #region 绳子隐藏与显示
+
+        private void HideRope(int index)
+        {
+            _ropeHelpers[index].GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
+
+        private void ActiveRope(int index)
+        {
+            _ropeHelpers[index].GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+
+        private void HideOrActiveRope(int index,bool isActive)
+        {
+            if(isActive)
+                ActiveRope(index);
+            else
+                HideRope(index);
+        }
+
+
+        public void HideOrActiveCurrentRope(bool isActive)
+        {
+            HideOrActiveRope(current, isActive);
+        }
+
+        public void HideOrActivePreRope(bool isActive)
+        {
+            HideOrActiveRope(pre, isActive);
+        }
+
+        public void HideOrActiveAfterRope(bool isActive)
+        {
+            HideOrActiveRope(after, isActive);
+        }
+
+        #endregion
 
     }
 }

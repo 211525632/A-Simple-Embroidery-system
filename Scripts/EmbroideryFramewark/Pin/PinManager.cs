@@ -92,8 +92,6 @@ public class PinManager : MonoSingleton<PinManager>
     private void SetEvent()
     {
         EventCenter<Action>.Instance.AddEvent(EventConst.OnPinEndEnter, () => this._pinSide = -_pinSide);
-    
-        
     }
 
     #endregion

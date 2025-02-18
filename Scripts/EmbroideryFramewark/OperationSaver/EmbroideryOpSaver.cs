@@ -49,6 +49,9 @@ namespace EmbroideryFramewark
     public class EmbroideryOpSaver
     {
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public EmbroideryOpSaver()
         {
             RopeDatas = new();
@@ -96,11 +99,15 @@ namespace EmbroideryFramewark
             RopeDatas.Push(_opDateCachine.Pop());
             RopeModels.Push(_opModelCachine.Pop());
 
-            ///显示
+            ///显示被撤销的模型
             RopeModels.Peek().SetActive(true);
 
-            ///将剩下的绳子的首部 与 现在的尾部相连接
-            RopeManager.Instance.CurrentRopeHelper.SetEndPosition(RopeDatas.Peek().begin);
+            Vector3 reversePosition = RopeDatas.Peek().begin;
+            reversePosition.y = -reversePosition.y;
+
+            ///将剩下的绳子的尾部 与 被隐藏的尾部相连接
+            RopeManager.Instance.CurrentRopeHelper.SetEndPosition(reversePosition);
+
         }
 
 
@@ -124,14 +131,15 @@ namespace EmbroideryFramewark
             _opDateCachine.Push(RopeDatas.Pop());
             _opModelCachine.Push(RopeModels.Pop());
 
-            ///隐藏，可以使用池来缓冲
+            ///隐藏被撤销的模型，可以使用池来缓冲
             _opModelCachine.Peek().SetActive(false);
 
-            RopeManager.Instance.HidePreRope();
-            RopeManager.Instance.HideAfterRope();
+            RopeManager.Instance.HideOrActivePreRope(false);
+            RopeManager.Instance.HideOrActiveAfterRope(false);
 
             ///将剩下的绳子的首部 与 现在的尾部相连接
-            RopeManager.Instance.CurrentRopeHelper.SetEndPosition(RopeDatas.Peek().begin);
+            RopeManager.Instance.CurrentRopeHelper.SetEndPosition(_opDateCachine.Peek().end);
+
         }
 
 
