@@ -9,6 +9,10 @@ using UnityEngine;
 
 namespace UiFramewark
 {
+
+    /// <summary>
+    /// Ui层级
+    /// </summary>
     public static class UiLayer
     {
         public static Dictionary<string, int> _layerDict = null;
@@ -40,6 +44,7 @@ namespace UiFramewark
 
     /// <summary>
     /// 层级管理器
+    /// TODO：把IUiComponent删除
     /// </summary>
     public class UiLayerManager : IUiComponent
     {

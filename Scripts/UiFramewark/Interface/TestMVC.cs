@@ -118,4 +118,18 @@ namespace UiFramewark
         void UpdateSlide();
 
     }
+
+
+
+    public interface IUiAction
+    {
+        void OnEnable();
+
+        void OnDisable();
+
+
+        void OnCreate();
+
+        void OnDestroy();
+    }
 }

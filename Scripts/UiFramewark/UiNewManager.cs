@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UiFramewark;
 using UnityEngine;
+using XLua;
 
 namespace Assets.Scripts.UiFramewark
 {
@@ -24,10 +27,16 @@ namespace Assets.Scripts.UiFramewark
         private void Start()
         {
             _uilayerManager = new UiLayerManager();
+
+            SetLuaRequire();
+        }
+        private void SetLuaRequire()
+        {
+            LuaManager.LuaEnv.DoString("require 'LuaUiSetting'");
+            LuaManager.LuaEnv.Global.GetInPath<LuaFunction>("LuaUi.SetAllRequire").Call();
         }
 
         private UiLayerManager _uilayerManager;
-
 
         #region -------------------------Ui的显示-------------------------------
 
@@ -80,6 +89,11 @@ namespace Assets.Scripts.UiFramewark
             //实例化
             tempUiCollection = Instantiate<GameObject>(tempUiCollection);
 
+
+            ///TODO：需要设置绑定
+            UiCollection collection = tempUiCollection.GetComponent<UiCollection>();
+            SetBinding(collection);
+
             if (object.ReferenceEquals(null, tempUiCollection))
             {
                 Debug.LogError("在ui资源中找不到合适的资源：name:" + collectionName);
@@ -90,14 +104,23 @@ namespace Assets.Scripts.UiFramewark
             ///AddToUiPool（）；
 
             this._uilayerManager.SetUiLayer(
-                tempUiCollection.GetComponent<UiCollection>(),
+                collection,
                 uilayerTrans
                 );
 
 
             ///添加到资源管理
-            _currentActiveUiCollections.Add(collectionName,tempUiCollection.GetComponent<UiCollection>());
+            _currentActiveUiCollections.Add(collectionName, collection);
 
+        }
+
+
+        private void SetBinding(UiCollection collection)
+        {
+            if (collection.ActionClassName.Equals("None"))
+                return;
+
+            collection.LuaBinding(collection.ActionClassName);
         }
 
         #endregion

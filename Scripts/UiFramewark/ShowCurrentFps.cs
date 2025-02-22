@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using XLua;
 
+[LuaCallCSharp]
 public class ShowCurrentFps : MonoBehaviour
 {
     public TextMeshProUGUI TextMeshPro;
