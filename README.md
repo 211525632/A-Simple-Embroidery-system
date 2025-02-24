@@ -1,11 +1,5 @@
 # A-Simple-Embroidery-system
-
-## 简介:
-
-【效果图……】
-
-
-是一款基于Unity引擎与ObiRope插件实现的刺绣游戏
+款基于Unity引擎与ObiRope插件实现的刺绣游戏
 
 此项目尚未完成。
 
