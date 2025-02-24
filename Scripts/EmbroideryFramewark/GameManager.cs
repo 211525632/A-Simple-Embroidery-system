@@ -13,7 +13,6 @@ namespace EmbroideryFramewark
         [Header("布料的宽度")]
         [SerializeField] float _buLiaoWidth = 0.01f;
 
-        int _isPinInBack = 1;
 
         [Header("测试用绳子初始化长度：")]
         [SerializeField] float testLength = 1;
@@ -120,6 +119,7 @@ namespace EmbroideryFramewark
             ///EndEnter
             EventCenter<Action<Vector3>>.Instance.AddEvent(EventConst.OnPinEndEnter, SetNewRope);
 
+
             ///OnShrink
             EventCenter<Action>.Instance.AddEvent(EventConst.OnRopeShrink, OnRopeShrink);
 
@@ -143,8 +143,14 @@ namespace EmbroideryFramewark
             float x = PinPointVisualization.Instance.CalculateAdsorbedNumber(target.x);
             float z = PinPointVisualization.Instance.CalculateAdsorbedNumber(target.z);
 
-            Vector3 tempBegin = new Vector3(x, -_buLiaoWidth * _isPinInBack, z);
-            Vector3 tempEnd = new Vector3(x, -_buLiaoWidth * _isPinInBack, z);
+            Vector3 ordinaryPosition = new Vector3(x,0,z);
+
+            ///设置新生成的绳子的初始位置
+            Vector3 tempBegin = Vector3.zero;
+            Vector3 tempEnd = Vector3.zero;
+            RopeManager.Instance.CreateRopePointPositionWithSide(
+                ordinaryPosition, PinManager.Instance.PinSide
+                ,out tempBegin,out tempEnd);
 
             //创建新绳子
             RopeManager.Instance.CreateRope(tempBegin, tempEnd, _buLiaoWidth);
@@ -155,10 +161,6 @@ namespace EmbroideryFramewark
                 //调整到同样高度
             tempEnd.y = RopeManager.Instance.PreferRopeHelper._endTransform.position.y;
             RopeManager.Instance.PreferRopeHelper.SetBeginPosition(tempEnd);
-
-            //翻面
-            _isPinInBack = -_isPinInBack;
-
         }
 
 
@@ -181,7 +183,6 @@ namespace EmbroideryFramewark
             float moveLength = RopeManager.Instance.CurrentRopeHelper.RopePointDistance;
             if (_preLength > moveLength)
             {
-                //Debug.Log("PreLength:" + _preLength + " maxLength:" + moveLength);
                 return;
             }
 
