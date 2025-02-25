@@ -1,5 +1,5 @@
 ﻿
-using Assets.Scripts.UiFramewark;
+
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,7 +17,12 @@ namespace UiFramewark
 
         public void AddNewUiCollection()
         {
-            UiNewManager.Instance.ShowUiCollection("test");
+            UiNewManager.Instance.AddUiColliction("test");
+        }
+
+        public void CloseUiCollection()
+        {
+            UiNewManager.Instance.CloseUiCollection("test");
         }
 
         public void ChangeText()

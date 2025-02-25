@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.UiFramewark
+namespace UiFramewark
 {
     /// <summary>
     /// 利用AB包实现
@@ -10,6 +10,8 @@ namespace Assets.Scripts.UiFramewark
     {
         [Header("Ui预制体：（后期使用AB包加载）")]
         [SerializeField] private GameObject OneUiPrefab;
+
+        [SerializeField] public GameObject testObj;
 
         [Header("空物体（后期使用AB包加载）")]
         public GameObject _empty;

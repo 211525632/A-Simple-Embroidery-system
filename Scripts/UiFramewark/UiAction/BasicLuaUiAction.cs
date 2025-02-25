@@ -8,6 +8,13 @@ using XLua;
 
 namespace UiFramewark
 {
+
+    /// <summary>
+    /// 好像转为完全使用Lua进行编写了
+    /// 放弃了使用Lua继承C#类的这种方式
+    /// 
+    /// 原因是，lua生成的table不能动态转化成C#类的userdata！
+    /// </summary>
     [CSharpCallLua]
     [LuaCallCSharp]
     public class BasicLuaUiAction : BasicUiAction
@@ -42,12 +49,12 @@ namespace UiFramewark
 
         public override void OnDisable()
         {
-            Debug.Log("LuaBasicAction：：Disable");
+            Debug.Log("LuaBasicAction：：ReturnObj");
         }
 
         public override void OnEnable()
         {
-            Debug.Log("LuaBasicAction：：Enable");
+            Debug.Log("LuaBasicAction：：BorrowObj");
         }
     }
 }

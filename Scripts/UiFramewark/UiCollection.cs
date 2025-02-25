@@ -1,5 +1,7 @@
-﻿using Assets.Scripts;
+﻿
+using MyLua;
 using Obi;
+using Pools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,9 +9,15 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.Events;
 using XLua;
+using Cachine;
 
 namespace UiFramewark
 {
+    public enum UiLoadState
+    {
+        Lua,CSharp
+    }
+
 
     /// <summary>
     /// Ui集合，是ui的容器
@@ -19,8 +27,11 @@ namespace UiFramewark
     /// 
 
     [LuaCallCSharp]
-    public class UiCollection : MonoBehaviour
+    public class UiCollection : MonoBehaviour,ISelfDestroyAble
     {
+        [Header("当前UI进行特殊功能绑定的时候，采用的加载形式（目前只有Lua）")]
+        public UiLoadState state;
+
         public string ActionClassName = "None";
 
         private void Awake()
@@ -137,8 +148,15 @@ namespace UiFramewark
             OnUpdate?.Invoke();
         }
 
+
         #endregion
 
+
+
+        public void SelfDestory()
+        {
+            Destroy(this.gameObject);
+        }
 
     }
 }

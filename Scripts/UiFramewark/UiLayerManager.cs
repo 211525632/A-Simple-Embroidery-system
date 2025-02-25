@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.UiFramewark;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -157,7 +157,7 @@ namespace UiFramewark
         private GameObject tempUiCollection = null;
 
         /// <summary>
-        /// 生成的UiCollection位于指定层
+        /// 生成的UiCollection位于指定 Root之下
         /// </summary>
         /// <param name="collectionName">   UiCollection的名称</param>
         /// <param name="uilayerTrans"      被设置成ui集群的父物体</param>
@@ -181,6 +181,8 @@ namespace UiFramewark
         }
 
         #endregion
+
+
 
         void IUiComponent.Run()
         {
