@@ -46,7 +46,7 @@ namespace UiFramewark
     /// 层级管理器
     /// TODO：把IUiComponent删除
     /// </summary>
-    public class UiLayerManager : IUiComponent
+    public class UiLayerManager 
     {
 
         private bool _isInit = false;
@@ -184,9 +184,5 @@ namespace UiFramewark
 
 
 
-        void IUiComponent.Run()
-        {
-            
-        }
     }
 }

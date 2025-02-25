@@ -1,4 +1,5 @@
-using Assets.Scripts;
+
+using MyLua;
 using System;
 using UnityEngine;
 using XLua;

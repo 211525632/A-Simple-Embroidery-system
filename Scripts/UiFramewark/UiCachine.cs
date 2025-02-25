@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Cachine;
+
 namespace UiFramewark
 {
     /// <summary>
     /// 对Hide的Ui进行缓存
     /// </summary>
-    public class UiPool : IUiComponent
+    public class UiCachine : Cachine<UiCollection>
     {
-        public void Run()
+        public UiCachine(float checkDeltaTime) : base(checkDeltaTime)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

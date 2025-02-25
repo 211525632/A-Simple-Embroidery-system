@@ -14,14 +14,14 @@ namespace Cachine
     /// <summary>
     /// 物体缓存
     /// </summary>
-    public class SubjectCachine<T> where T : class, ISelfDestroyAble
+    public class Cachine<T> where T : class, ISelfDestroyAble
     {
         /// <summary>
         /// 检查并清除的一个间隔时间
         /// </summary>
         private float _clearDeltaTime;
 
-        public SubjectCachine(float checkDeltaTime)
+        public Cachine(float checkDeltaTime)
         {
             this._clearDeltaTime = checkDeltaTime;
             _cachine = new();

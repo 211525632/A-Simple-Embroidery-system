@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.IO;
 
-namespace Assets.Scripts
+namespace MyLua
 {
     public class LuaManager : MonoSingleton<LuaManager>
     {

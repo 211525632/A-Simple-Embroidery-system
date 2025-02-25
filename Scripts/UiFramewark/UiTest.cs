@@ -17,17 +17,17 @@ namespace UiFramewark
 
         public void AddNewUiCollection()
         {
-            UiNewManager.Instance.AddUiColliction("test");
+            UiManager.Instance.AddUiColliction("test");
         }
 
         public void CloseUiCollection()
         {
-            UiNewManager.Instance.CloseUiCollection("test");
+            UiManager.Instance.CloseUiCollection("test");
         }
 
         public void ChangeText()
         {
-            UiNewManager.Instance.GetUiCollection("test").GetUi<UiText>("mainInf").SetText("this is aother test Text！");
+            UiManager.Instance.GetUiCollection("test").GetUi<UiText>("mainInf").SetText("this is aother test Text！");
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace UiFramewark
         /// </summary>
         public void ActiveButtonEvent()
         {
-            UiNewManager.Instance.GetUiCollection("test")
+            UiManager.Instance.GetUiCollection("test")
                 .GetUi<UiButton>("Button")
                 .AddListener(
                 () => { 
