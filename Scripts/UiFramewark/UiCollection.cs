@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using XLua;
 using Cachine;
+using System.Text;
 
 namespace UiFramewark
 {
@@ -27,7 +28,7 @@ namespace UiFramewark
     /// 
 
     [LuaCallCSharp]
-    public class UiCollection : MonoBehaviour,ISelfDestroyAble
+    public class UiCollection : MonoBehaviour,ISelfDestroyAble,IMPoolAble
     {
         [Header("当前UI进行特殊功能绑定的时候，采用的加载形式（目前只有Lua）")]
         public UiLoadState state;
@@ -158,5 +159,31 @@ namespace UiFramewark
             Destroy(this.gameObject);
         }
 
+
+        #region 实现IMPoolAble
+
+        public void OnRecycle()
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        public void OnBorrow()
+        {
+            this.gameObject.SetActive(true);
+        }
+
+        public object SelfCopy()
+        {
+            return MonoBehaviour.Instantiate<GameObject>(this.gameObject).GetComponent<UiCollection>();
+        }
+
+        void IMPoolAble.OnDestroy()
+        {
+            this.SelfDestory();
+        }
+
+
+        #endregion
+    
     }
 }

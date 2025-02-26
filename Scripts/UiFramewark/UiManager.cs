@@ -206,7 +206,7 @@ namespace UiFramewark
         private Dictionary<string, UiCollection> _currentActiveUiCollections = new();
 
         /// <summary>
-        /// 缓存，只有在被关闭之后才会添加进去
+        /// 缓存，只有在UI被关闭之后才会添加进去
         /// </summary>
         public UiCachine _uiCachine = null;
 

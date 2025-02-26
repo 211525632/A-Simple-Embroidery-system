@@ -1140,7 +1140,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871529910}
-  - component: {fileID: 871529909}
+  - component: {fileID: 871529912}
+  - component: {fileID: 871529911}
   m_Layer: 0
   m_Name: PoolTest
   m_TagString: Untagged
@@ -1148,24 +1149,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &871529909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871529908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0773be09a0f5f28449b78cd358d72274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArrCount: 0
-  opIndex: 0
-  currentOpPoolIndex: -1
-  add: 0
-  enable: 0
-  disable: 0
 --- !u!4 &871529910
 Transform:
   m_ObjectHideFlags: 0
@@ -1181,6 +1164,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &871529911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871529908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26df8c2d3f9cda143bc87f84439410ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameObject: {fileID: 0}
+--- !u!114 &871529912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871529908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb7c14bc7fc51249accab2d78f25919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &950571996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1778,6 @@ GameObject:
   - component: {fileID: 1991489224}
   - component: {fileID: 1991489223}
   - component: {fileID: 1991489222}
-  - component: {fileID: 1991489225}
   m_Layer: 0
   m_Name: UiManager
   m_TagString: Untagged
@@ -1802,13 +1809,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991489221}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 093dbe8e11bec4b4ebd9306dc6894192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rootTrans: {fileID: 0}
-  haveUi: 0
+  cachineTime: 2
 --- !u!4 &1991489224
 Transform:
   m_ObjectHideFlags: 0
@@ -1824,19 +1830,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1991489225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991489221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84365c01b276b2a4d8f7c0465f38881d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cachineTime: 2
 --- !u!1 &2014768706
 GameObject:
   m_ObjectHideFlags: 0

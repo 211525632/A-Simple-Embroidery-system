@@ -13,6 +13,11 @@ namespace Cachine
 {
     /// <summary>
     /// 物体缓存
+    /// 
+    /// 主要解决的问题是，反复创建和销毁同一种东西
+    /// 通过缓存，将其暂时存放在Cachine之中，
+    /// 在一定时间内，可以再次取出相应物体。重复使用。
+    /// 
     /// </summary>
     public class Cachine<T> where T : class, ISelfDestroyAble
     {
@@ -80,6 +85,7 @@ namespace Cachine
         /// </summary>
         private List<CachineObjPackage<T>> _cachine;
 
+
         #region 自动销毁
 
         CachineAutoDelMachine _autoDeleMachine;
@@ -105,7 +111,6 @@ namespace Cachine
 
         protected virtual void AutoDele()
         {
-            Debug.Log("autoDele");
             try
             {
                 for (int i = 0; i < _cachine.Count; ++i)
@@ -269,6 +274,7 @@ namespace Cachine
             _cachine[key].UnpackingAndDele();
         }
 
+
         private void Remove(string name)
         {
             _cachine[_nameToKey[name]].UnpackingAndDele();
@@ -294,6 +300,8 @@ namespace Cachine
             this._nameToKey.Clear();
             this._cachine.Clear();
         }
+
+
         #endregion
 
     }
